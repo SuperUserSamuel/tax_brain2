@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "288948661736",
+    "project_id": "tax-brain",
+    "storage_bucket": "tax-brain.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288948661736:android:8365cd0592f8de6762085d",
+        "android_client_info": {
+          "package_name": "com.superusersamuel.tax_calculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC11JGBst-4VuFun8YSpLYBggAESIO9Vw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
