@@ -1,30 +1,34 @@
 import '../../action/get_taxes.dart';
 
-// class ExpenseCategorizer {
-//   static ExpenseCategory categorize(String narration, bool isDebit) {
-//     if (!isDebit) return ExpenseCategory.income;
-//
-//     final n = narration.toLowerCase();
-//
-//     if (n.contains("uber") || n.contains("bolt")) {
-//       return ExpenseCategory.transport;
-//     }
-//     if (n.contains("restaurant") || n.contains("food")) {
-//       return ExpenseCategory.food;
-//     }
-//     if (n.contains("electric") || n.contains("water")) {
-//       return ExpenseCategory.utilities;
-//     }
-//     if (n.contains("netflix") || n.contains("spotify")) {
-//       return ExpenseCategory.entertainment;
-//     }
-//     if (n.contains("store") || n.contains("mall")) {
-//       return ExpenseCategory.shopping;
-//     }
-//
-//     return ExpenseCategory.other;
-//   }
-// }
+/// ================= ENUMS & HELPERS =================
+
+enum TransactionCategory { airtime, food, rent, transfer, income, other }
+
+TransactionCategory classifyTransaction(String narration, String type) {
+  final text = narration.toLowerCase();
+  if (type == "credit") return TransactionCategory.income;
+  if (text.contains("airtime")) return TransactionCategory.airtime;
+  if (text.contains("food")) return TransactionCategory.food;
+  if (text.contains("rent")) return TransactionCategory.rent;
+  if (text.contains("transfer")) return TransactionCategory.transfer;
+  return TransactionCategory.other;
+}
+
+bool isTaxEligible(TransactionCategory c) =>
+    c == TransactionCategory.income;
+
+String categoryLabelForTransact(TransactionCategory c) =>
+    c.toString().split('.').last.toUpperCase();
+
+double calculateTax(double income) {
+  if (income <= 3000) return income * 0.07;
+  if (income <= 10000) {
+    return (3000 * 0.07) + ((income - 3000) * 0.11);
+  }
+  return (3000 * 0.07) +
+      (7000 * 0.11) +
+      ((income - 10000) * 0.18);
+}
 
 
 

@@ -18,30 +18,32 @@ class IncomeDashboardPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Income Insights"),
         centerTitle: true,
+        title: Text('Income Insights'),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          _overviewCards(income),
-          const SizedBox(height: 20),
-          _cashflowChart(streams),
-          const SizedBox(height: 20),
-          const Text(
-            "Income Streams",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
-          ...streams.map(_incomeStreamCard),
+       body: ListView(
+         padding: const EdgeInsets.all(16),
+         children: [
 
-          monthlyTaxReport(double.parse(income['total_income'].toString())),
-          const SizedBox(height: 20),
-        incomeExpenseTaxChart(income: double.parse(income['total_income'].toString()), expenses: 9000.toDouble()),
-          const SizedBox(height: 20),
-        ],
-      ),
-    );
+           const SizedBox(height: 20),
+           _overviewCards(income),
+           const SizedBox(height: 20),
+           // _cashflowChart(streams),
+           // const SizedBox(height: 20),
+           const Text(
+             "Income Streams",
+             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+           ),
+           const SizedBox(height: 12),
+           ...streams.map(_incomeStreamCard),
+
+           monthlyTaxReport(double.parse(income['total_income'].toString())),
+           const SizedBox(height: 20),
+         incomeExpenseTaxChart(income: double.parse(income['total_income'].toString()), expenses: 9000.toDouble()),
+           const SizedBox(height: 20),
+         ],
+       ),
+     );
   }
 
   Widget _overviewCards(Map<String, dynamic> income) {

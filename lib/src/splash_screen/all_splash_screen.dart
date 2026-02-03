@@ -1,12 +1,12 @@
 
 import 'dart:math' as math;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tax_calculator/utils/navigate.dart';
 
 import '../../home/home.dart';
-import '../authentication/confirm_email.dart';
+
+import '../../home/user-intent_page.dart';
 import '../authentication/login.dart';
 import '../authentication/signup.dart';
 
@@ -269,23 +269,18 @@ class _OnboardingScreen1State extends State<OnboardingScreen1>
                   ),
                 ),
                 const SizedBox(height: 40),
-                // GestureDetector(
-                //   onTap: () {},
-                //   child: const Text(
-                //     'Check our rates',
-                //     style: TextStyle(
-                //       fontSize: 18,
-                //       decoration: TextDecoration.underline,
-                //       fontWeight: FontWeight.w600,
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(height: 60),
                 SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      AppNavigation.push(context,
+                         // WiseAppShell()
+                          WiseAccountScreen()
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF9FE870),
                       foregroundColor: Colors.black,
@@ -295,7 +290,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1>
                       elevation: 0,
                     ),
                     child: const Text(
-                      'Get started',
+                      'Get Started',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -393,7 +388,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1>
 }
 
 class OnboardingScreen2 extends StatefulWidget {
-  const OnboardingScreen2({Key? key}) : super(key: key);
+  const OnboardingScreen2({super.key});
 
   @override
   State<OnboardingScreen2> createState() => _OnboardingScreen2State();
@@ -598,7 +593,12 @@ class _OnboardingScreen2State extends State<OnboardingScreen2>
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      AppNavigation.push(context,
+                          WiseAccountScreen()
+                          //WiseOnboardingScreen()
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF9FE870),
                       foregroundColor: Colors.black,
@@ -608,7 +608,7 @@ class _OnboardingScreen2State extends State<OnboardingScreen2>
                       elevation: 0,
                     ),
                     child: const Text(
-                      'Get started',
+                      'Get Started',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -817,61 +817,61 @@ class _OnboardingScreen3State extends State<OnboardingScreen3>
               const SizedBox(height: 40),
 
               // Action buttons
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          AppNavigation.push(context, AdaptiveLoginScreen());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF9FE870),
-                          foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28),
-                          ),
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          'Log in',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: SizedBox(
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          AppNavigation.push(context, AdaptiveSignupScreen());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF9FE870),
-                          foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28),
-                          ),
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: SizedBox(
+              //         height: 56,
+              //         child: ElevatedButton(
+              //           onPressed: () {
+              //             AppNavigation.push(context, AdaptiveLoginScreen());
+              //           },
+              //           style: ElevatedButton.styleFrom(
+              //             backgroundColor: const Color(0xFF9FE870),
+              //             foregroundColor: Colors.black,
+              //             shape: RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(28),
+              //             ),
+              //             elevation: 0,
+              //           ),
+              //           child: const Text(
+              //             'Log in',
+              //             style: TextStyle(
+              //               fontSize: 18,
+              //               fontWeight: FontWeight.w600,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 16),
+              //     Expanded(
+              //       child: SizedBox(
+              //         height: 56,
+              //         child: ElevatedButton(
+              //           onPressed: () {
+              //             AppNavigation.push(context, AdaptiveSignupScreen());
+              //           },
+              //           style: ElevatedButton.styleFrom(
+              //             backgroundColor: const Color(0xFF9FE870),
+              //             foregroundColor: Colors.black,
+              //             shape: RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(28),
+              //             ),
+              //             elevation: 0,
+              //           ),
+              //           child: const Text(
+              //             'Register',
+              //             style: TextStyle(
+              //               fontSize: 18,
+              //               fontWeight: FontWeight.w600,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(height: 16),
 
               SizedBox(
@@ -879,9 +879,12 @@ class _OnboardingScreen3State extends State<OnboardingScreen3>
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    AppNavigation.push(context,
-                        WiseAppShell()
+                    AppNavigation.pushReplacement (context,
+                      //  WiseAppShell()
+                        WiseAccountScreen()
                     );
+
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF9FE870),

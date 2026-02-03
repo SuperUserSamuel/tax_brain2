@@ -1,3 +1,5 @@
+import 'categorizer.dart';
+
 class TaxBracket {
   final double upTo;
   final double rate;
@@ -106,37 +108,9 @@ class MonthlyTaxReport {
 
 
 
-enum TransactionCategory {
-  airtime,
-  food,
-  rent,
-  transfer,
-  income,
-  other,
-}
-
-TransactionCategory classifyTransaction(String narration, String type) {
-  final text = narration.toLowerCase();
-
-  if (type == "credit") return TransactionCategory.income;
-  if (text.contains("airtime")) return TransactionCategory.airtime;
-  if (text.contains("food") || text.contains("restaurant")) {
-    return TransactionCategory.food;
-  }
-  if (text.contains("rent")) return TransactionCategory.rent;
-  if (text.contains("transfer")) return TransactionCategory.transfer;
-
-  return TransactionCategory.other;
-}
-
-bool isTaxEligible(TransactionCategory category) {
-  return category == TransactionCategory.income;
-}
-
-String categoryLabel(TransactionCategory c) =>
-    c.toString().split('.').last.toUpperCase();
 
 
+/// ================= MODEL =================
 
 class BankTransaction {
   final String id;
@@ -156,16 +130,15 @@ class BankTransaction {
   });
 
   factory BankTransaction.fromJson(Map<String, dynamic> json) {
-    final category =
-    classifyTransaction(json['narration'], json['type']);
-
     return BankTransaction(
       id: json['id'],
       type: json['type'],
       amount: (json['amount'] as num).toDouble(),
       narration: json['narration'],
       date: DateTime.parse(json['date']),
-      category: category,
+      category:
+      classifyTransaction(json['narration'], json['type']),
     );
   }
+
 }

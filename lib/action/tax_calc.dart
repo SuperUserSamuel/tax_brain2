@@ -50,38 +50,44 @@ class _AdvancedTaxCalculatorScreenState
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   elevation: 0,
-        //   backgroundColor: Colors.white,
-        //   foregroundColor: Colors.black,
-        //   title: const Text(
-        //     "Tax Calculator",
-        //     style: TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        // ),
-        body: ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            _incomeInput(),
-            const SizedBox(height: 20),
-            _periodToggle(),
-            const SizedBox(height: 20),
-            _taxSlider(),
-            const SizedBox(height: 30),
-            _animatedChart(),
-            const SizedBox(height: 30),
-            _summaryCard(),
-            const SizedBox(height: 20),
-            _saveButton(),
-            if (savedCalculations.isNotEmpty) ...[
-              const SizedBox(height: 30),
-              _savedCalculations(),
-            ]
-          ],
+        foregroundColor: Colors.black,
+        title: const Text(
+          "Tax Calculator",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+
+          const SizedBox(height: 10),
+          Opacity(
+              opacity: 0.6,
+              child: Text('Manually calculate your taxes here in accorrdance with the new tax law formula', style: TextStyle(
+                fontSize: 14
+              ))),
+          const SizedBox(height: 30),
+          _incomeInput(),
+          // const SizedBox(height: 20),
+          // _periodToggle(),
+          // const SizedBox(height: 20),
+          // _taxSlider(),
+          const SizedBox(height: 30),
+          _animatedChart(),
+          const SizedBox(height: 30),
+          _summaryCard(),
+          const SizedBox(height: 20),
+          _saveButton(),
+          if (savedCalculations.isNotEmpty) ...[
+            const SizedBox(height: 30),
+            _savedCalculations(),
+          ]
+        ],
       ),
     );
   }
@@ -94,7 +100,7 @@ class _AdvancedTaxCalculatorScreenState
       onChanged: (_) => setState(() {}),
       decoration: InputDecoration(
         labelText: "Income",
-        prefixText: "\$ ",
+        prefixText: "\₦ ",
         filled: true,
         fillColor: const Color(0xFFF3F4F6),
         border: OutlineInputBorder(
@@ -106,19 +112,19 @@ class _AdvancedTaxCalculatorScreenState
   }
 
   // 📅 Monthly / Yearly Toggle
-  Widget _periodToggle() {
-    return Row(
-      children: [
-        _toggleButton("Monthly", !isYearly, () {
-          setState(() => isYearly = false);
-        }),
-        const SizedBox(width: 12),
-        _toggleButton("Yearly", isYearly, () {
-          setState(() => isYearly = true);
-        }),
-      ],
-    );
-  }
+  // Widget _periodToggle() {
+  //   return Row(
+  //     children: [
+  //       _toggleButton("Monthly", !isYearly, () {
+  //         setState(() => isYearly = false);
+  //       }),
+  //       const SizedBox(width: 12),
+  //       _toggleButton("Yearly", isYearly, () {
+  //         setState(() => isYearly = true);
+  //       }),
+  //     ],
+  //   );
+  // }
 
   Widget _toggleButton(
       String text, bool selected, VoidCallback onTap) {
@@ -145,25 +151,25 @@ class _AdvancedTaxCalculatorScreenState
   }
 
   // 🎚️ Tax Slider
-  Widget _taxSlider() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Tax Rate: ${taxRate.toStringAsFixed(0)}%",
-            style: const TextStyle(fontWeight: FontWeight.w600)),
-        Slider(
-          value: taxRate,
-          min: 0,
-          max: 50,
-          divisions: 50,
-          activeColor: Colors.green,
-          onChanged: (value) {
-            setState(() => taxRate = value);
-          },
-        ),
-      ],
-    );
-  }
+  // Widget _taxSlider() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text("Tax Rate: ${taxRate.toStringAsFixed(0)}%",
+  //           style: const TextStyle(fontWeight: FontWeight.w600)),
+  //       Slider(
+  //         value: taxRate,
+  //         min: 0,
+  //         max: 50,
+  //         divisions: 50,
+  //         activeColor: Colors.green,
+  //         onChanged: (value) {
+  //           setState(() => taxRate = value);
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
 
   // 📊 Animated Bar Chart
   Widget _animatedChart() {
@@ -228,7 +234,7 @@ class _AdvancedTaxCalculatorScreenState
                 fontWeight:
                 highlight ? FontWeight.bold : FontWeight.w500)),
         Text(
-          "\$${value.toStringAsFixed(2)}",
+          "\₦${value.toStringAsFixed(2)}",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: highlight ? Colors.green.shade800 : Colors.black,
@@ -240,17 +246,30 @@ class _AdvancedTaxCalculatorScreenState
 
   // 💾 Save Button
   Widget _saveButton() {
-    return ElevatedButton(
-      onPressed: saveCalculation,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.green,
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+    return
+      SizedBox(
+        width: double.infinity,
+        height: 56,
+        child: ElevatedButton(
+          onPressed: saveCalculation,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF9FE870),
+            foregroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(28),
+            ),
+            elevation: 0,
+          ),
+          child: const Text(
+            'Use Smart Calculator',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
-      ),
-      child: const Text("Save Calculation"),
-    );
+      );
+
   }
 
   // 📜 Saved Calculations
